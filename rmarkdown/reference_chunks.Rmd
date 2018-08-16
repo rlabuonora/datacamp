@@ -1,0 +1,24 @@
+---
+title: "Referenced_chunks"
+output: html_document
+---
+
+```{r, results = 'hide', message = FALSE, echo = FALSE}
+library(dplyr)
+library(ggvis)
+```
+
+```{r}
+mtcars %>%
+  group_by(factor(cyl)) %>%
+  ggvis(~mpg, ~wt, fill = ~cyl) %>%
+  layer_points()
+```
+
+```{r simple_sum, echo = FALSE, results = 'hide'}
+2+2
+```
+
+```{r ref.label='simple_sum', echo = FALSE}
+
+```

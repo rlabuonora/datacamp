@@ -1,0 +1,72 @@
+---
+title: "Raster Data"
+output: html_document
+---
+Reading raster data
+
+The term "raster" refers to gridded data that can include satellite imagery, aerial photographs (like orthophotos) and other types. In R, raster data can be handled using the raster package created by Robert J. Hijmans.
+
+When working with raster data, one of the most important things to keep in mind is that the raw data can be what is known as "single-band" or "multi-band" and these are handled a little differently in R. Single-band rasters are the simplest, these have a single layer of raster values -- a classic example would be an elevation raster where each cell value represents the elevation at that location.
+
+Multi-band rasters will have more than one layer. An example is a color aerial photo in which there would be one band each representing red, green or blue light.
+
+```{r}
+# load raster package
+library(raster)
+# read canopy single-band raster
+canopy <- raster('./data/canopy/canopy.tif')
+# read manhattan multi-layer land stat
+manhattan <- brick('./data/manhattan/manhattan.tif')
+
+```
+
+spatial objects in `sf` are just data frames with some special properties. Geometry is stored in list-columns
+
+A major innovation in sf is that spatial objects are data frames. This is possible thanks, in part, to the list-column.
+
+A list-column behaves, to a certain extent, like any other R column. The main difference is that instead of a standard value such as a single number, character or boolean value, each observation value in that column is a piece of an R list and this list can be as complex as needed. The list column allows you to store far more information in a single variable and sf takes advantage of this by storing all geographic information for each feature in the list.
+
+In this exercise, you will convert the data frame to what's called a tibble with tibble::as_tibble() (Note that dplyr::tbl_df() is now deprecated).
+
+## Extracting geometric information from your vector layers
+
+There are several functions in sf that allow you to access geometric information like area from your vector features. For example, the functions st_area() and st_length() return the area and length of your features, respectively.
+
+Note that the result of functions like st_area() and st_length() will not be a traditional vector. Instead the result has a class of units which means the vector result is accompanied by metadata describing the object's units. As a result, code like this won't quite work:
+
+```{r}
+parks <- st_read("./data/parks/parks.shp")
+park_area <- st_area(parks) 
+park_area_2 <- parks$geometry
+```
+
+# Dplyr + sf_
+
+```{r}
+big_parks <- parks %>% 
+  dplyr::filter(unclass(st_area(parks)) > 30000)
+```
+
+# First look at plotting vector spatial objects
+The function for making a quick map/plot is a function you are already familiar with, plot(). You can, for example, type plot(my_data) to see your spatial object. The default, though, may not be what you want. 
+
+The plot() function, when applied to sf objects, will create a set of maps, one for each attribute in your data. 
+```{r}
+plot(parks)
+```
+
+
+Instead, if you want to create a map of a single attribute you can extract that attribute using, as an example, plot(my_data["my_variable"]).
+
+```{r}
+plot(parks["acres"])
+```
+
+Frequently you just want to plot the raw geometry with no attribute color-coding (e.g., adding county boundaries to a map of points). For this, you can use the st_geometry() function to extract the geometry and plot the result. You can either create a new object or you can nest st_geometry() within the plot() function.
+
+```{r}
+plot(parks$geometry)
+# or
+plot(st_geometry(parks))
+```
+
