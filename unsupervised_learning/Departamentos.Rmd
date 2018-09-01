@@ -1,0 +1,48 @@
+---
+title: "PCA Deptos"
+author: "Rafa"
+date: "8/28/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Los CCE son una intervención que tiene como objetivo mejorar la gestión de las empresas y la competitividad. Los CCE tienen un alcance a nivel de la ciudad en que estan instaldos. Datos de esto?
+
+Dadas las limitaciones en la cantidad de Centros a abrir en todo el país, es importante definir en cuales departamentos es razonable instalar Centros. 
+
+El objetivo de priorizar la asignación de recursos entre los departamentos.
+Existen numerosos indicadores de desarrollo económico calculados a nivel departamental. Para este trabajo recopilamos varios (pib_per_capita, informalidad, subempleo, emprendedurismo). A continuación se presenta una tabla de indices incluídos.
+
+Con este objetivo, desarrollamos una clasificación de los departamentos del país en base a los valores que presentan de varios indicadores de desarrollo. Estos indicadores incluyen el pib per capita, recientemente publicado por OPP, el idd, desarrollado por XXX, y otros indicadores de desarrollo económico y del tejido empresarial de los deptos.
+
+Esta información permite caracterizar departamentos y separarlos en grupos de departamentos similares.
+
+Usamos técnicas PCA para encontrar grupos de departamentos con similares niveles en los indicadores recopilados.
+
+Usando técnicas de Clusters, se encuentran cuatro grupos de departamento que tienen valores similares en los indicadores recopilados.
+
+En el primer grupo se encuentran los departamentos de Rivera, Tacuarembó, Salto, etc. Son departamentos con bajos niveles de PIB per cápita, desarrollo humano, alto nivel de subempleo e informalidad. A su vez, presentan bajo nivel de ámbitos de participación ciudadana(?), pocos proyectos aprobados en COMAP, nivel XX de bancarización y de acceso a internet.
+
+En el segundo grupo se encuentran los departamentos de Río Negro, Maldonado, ?? y ??. Estos departamentos presentan altos niveles de captación de IED WHAT??, . En un contínuo entre estos dos extremos se encuentran la mayor parte de los departamentos del centro del país;
+
+Finalmente, hay dos departamentos suficientemente distintos del resto para formar un cluster cada uno. Los departamentos más grandes del país, Montevideo y Canelones son relativamente distintos entre sí, y de los departamentos de los otros de clusters para formar un cluster de un departamento cada uno. Es importante resaltar que estos departamentos no son similares entre sí, sino que formar un grupo cada uno. 
+
+En el siguiente gráfico se ven los dos primeros componentes principales de los datos, justo con las variables originales.
+
+Además, estos departamentos presentan un heterogeneidad distinta. 
+
+
+Esto sugiere que podría ser valiosos hacer este análisis a nivel de Ciudades. En efecto, dado que el alcance de los centros es a nivel de la ciudad en la que se instala, la elección relevante no es entre departamentos sino entre ciudades.
+
+Tanto Canelones como Montevideo tienen niveles medios de PIB per capita e idd. Sin embargo, tienen valores muy diferentes de subempleo, informalidad y emprendedurismo.
+
+Las principal diferencia entre estos dos grupos son que el primero presenta mayores niveles de pib_per_capita, idd, y menores de subempleo e informalidad.
+
+El PC1 representa las variables A, B y C. El PC2 las D y la F.
+
+Montevideo tanto el PC2 como el PC1 bajos. Canelones tiene el PC1 medio y el PC2 bajo.
+El grupo 1 tiene el PC1 medio y el PC2 alto. El grupo 2 tiene el PC1 alto y el PC2 medio.
+
+
