@@ -5,3 +5,6 @@
 ./spatial/data/*/*
 .DS_Store
 ggplot_viz/
+*/*/*.zip
+*/*.zip
+*/data
